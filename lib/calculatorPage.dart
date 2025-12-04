@@ -8,6 +8,30 @@ class Mycalculator extends StatefulWidget {
 }
 
 class _MycalculatorState extends State<Mycalculator> {
+final TextEditingController _myNum1 = TextEditingController();
+final TextEditingController _myNum2 = TextEditingController();
+final TextEditingController _total = TextEditingController();
+
+double result = 0.0;
+
+void _sum(){
+  setState(() {
+    double? input1 = double.tryParse(_myNum1.text);
+    double? input2 = double.tryParse(_myNum2.text);
+    
+
+  if(input1 != null && input2 != null){
+    result = input1 + input2;
+  _total.text = result.toString();
+    
+  }
+
+  else{
+    print("Num 1 and Num2 is Empty");
+  }
+
+  });
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +57,7 @@ class _MycalculatorState extends State<Mycalculator> {
               Icon(Icons.calculate, size: 120, color: Colors.blue),
               SizedBox(height: 50),
               TextField(
+                controller: _myNum1,
                 decoration: InputDecoration(
                   labelText: "Input the first number",
                   labelStyle: TextStyle(
@@ -53,6 +78,7 @@ class _MycalculatorState extends State<Mycalculator> {
               ),
               SizedBox(height: 20),
               TextField(
+                controller: _myNum2,
                 decoration: InputDecoration(
                   labelText: "Input the second number",
                   labelStyle: TextStyle(
@@ -73,7 +99,7 @@ class _MycalculatorState extends State<Mycalculator> {
               ),
           
               SizedBox(height: 20),
-              TextField(
+              TextField( controller: _total,
                 decoration: InputDecoration(
                   labelText: "Total",
                   labelStyle: TextStyle(
@@ -92,6 +118,7 @@ class _MycalculatorState extends State<Mycalculator> {
                   ),
                 ),
               ),
+              
               SizedBox(height: 50),
               SizedBox(
                 width: double.infinity,
@@ -101,8 +128,8 @@ class _MycalculatorState extends State<Mycalculator> {
                     backgroundColor: Colors.blue,
                     foregroundColor: Colors.white,
                   ),
-                  onPressed: () {},
-                  child: Text("Submit"),
+                  onPressed: _sum,
+                  child: Text("Kwentahin"),
                 ),
               ),
             ],
